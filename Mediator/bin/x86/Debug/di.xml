@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DI>
+  
+  <Builder assembly="Mediator" type="Mediator.ColorBuilder" name ="RedColor">
+    <Name>Red</Name>
+  </Builder>
+  
+  <Builder assembly="Mediator" type="Mediator.GameFormBuilder" name ="MainForm">
+    <Class>Mediator.Form1</Class>
+    <Assembly>Mediator</Assembly>
+    <CleanColor>Azure</CleanColor>
+    <ControlStyles>AllPaintingInWmPaint, Opaque</ControlStyles>
+    <World>SimpleWorld</World>
+    <Scene>SimpleScene</Scene>
+  </Builder>
+  
+  <Builder assembly="Mediator" type="Mediator.DeviceBuilder" name ="Device">
+    <Adapter>0</Adapter>
+    <DeviceType>Hardware</DeviceType>
+    <Control>RenderControl</Control>
+    <CreateFlags>
+      <SupportsHardwareTransformAndLight>HardwareVertexProcessing</SupportsHardwareTransformAndLight>
+      <SupportsPureDevice>PureDevice</SupportsPureDevice>
+      <Default>SoftwareVertexProcessing</Default>
+    </CreateFlags>
+    <PresentParameters>
+      <Windowed>true</Windowed>
+      <SwapEffect>Discard</SwapEffect>
+      <EnableAutoDepthStencil>true</EnableAutoDepthStencil>
+      <AutoDepthStencilFormat>D16</AutoDepthStencilFormat>
+    </PresentParameters>
+  </Builder>
+
+  <Builder assembly="Mediator" type="Mediator.PerspectiveCameraBuilder" name ="PerspectiveCamera">
+    <Angle>PI/4</Angle>
+    <Control>RenderControl</Control>
+    <Near>1,0</Near>
+    <Far>1000</Far>
+    <Position>
+      <X>0</X>
+      <Y>5</Y>
+      <Z>0</Z>
+    </Position>
+    <Target>
+      <X>0</X>
+      <Y>0</Y>
+      <Z>-10</Z>
+    </Target>
+    <Up>
+      <X>0</X>
+      <Y>1</Y>
+      <Z>0</Z>
+    </Up>
+  </Builder>
+
+  <Builder assembly="Mediator" type="Mediator.LightBuilder" name ="Light01">
+    <Type>Point</Type>
+    <Diffuse>White</Diffuse>
+    <Position>
+      <X>0</X>
+      <Y>5</Y>
+      <Z>0</Z>
+    </Position>
+    <Attenuation> 2,0 </Attenuation>
+    <Range>10000</Range>
+  </Builder>
+
+  <Builder assembly="Mediator" type="Mediator.LightBuilder" name ="Light02">
+    <Type>Directional</Type>
+    <Diffuse>White</Diffuse>
+    <Direction>
+      <X>1</X>
+      <Y>-1</Y>
+      <Z>-1</Z>
+    </Direction>
+  </Builder>
+
+  <Object assembly="Mediator" type="Mediator.RotationBehaviour" name ="Rotation"/>  
+  
+  <Builder assembly="Mediator" type="Mediator.SkinBuilder" name ="TriangleSkin">
+    <File>Assets\Meshes\Triangle.X</File>
+    <MeshFlags>Managed</MeshFlags>
+  </Builder> 
+  
+  <Builder assembly="Mediator" type="Mediator.SkinBuilder" name ="BoxSkin">
+    <File>Assets\Meshes\box.X</File>
+    <MeshFlags>Managed</MeshFlags>
+    <TexturesPath>Assets\Textures</TexturesPath>
+  </Builder> 
+  
+  <Builder assembly="Mediator" type="Mediator.SkinBuilder" name ="GroundSkin">
+    <File>Assets\Meshes\ground.X</File>
+    <MeshFlags>Managed</MeshFlags>
+    <TexturesPath>Assets\Textures</TexturesPath>
+  </Builder> 
+
+  <Builder assembly="Mediator" type="Mediator.SceneBuilder" name ="SimpleScene">
+    <Camera>PerspectiveCamera</Camera>
+    <List name ="Light">
+      <Item>Light02</Item>
+    </List>
+    <List name="Prefabs">  
+      
+      <Item>
+        <Skin>BoxSkin</Skin>
+        <Body>
+          <Position>
+            <X>0</X>
+            <Y>0</Y>
+            <Z>0</Z>
+          </Position>
+        </Body>
+      </Item>
+      
+      <Item>
+        <Body>SimpleWorld</Body>
+        
+          <Position>
+            <X>0</X>
+            <Y>0</Y>
+            <Z>-10</Z>
+          </Position>
+        <List name="Children">
+          
+          
+          <Item>
+            <Skin>GroundSkin</Skin>
+            <Body>
+              <Position>
+                <X>0</X>
+                <Y>-15</Y>
+                <Z>0</Z>
+              </Position>
+              <Rotation>
+                <X>0</X>
+                <Y>0</Y>
+                <Z>0</Z>
+               </Rotation>
+            </Body>
+          </Item>         
+
+        
+         </List>
+      </Item>
+    
+     </List>
+   </Builder>  
+  
+  <Builder assembly="Mediator" type="Mediator.BodyBuilder" name ="SimpleWorld">
+    <List name="Behaviour">
+    </List>
+    <MouseEventProvider>
+      <Instance>MainForm</Instance>
+      <List name="Actions">
+        <Item>
+          <List name="Events">
+            <Item>MouseMove</Item>
+          </List>
+          <Control>Mediator.BodyRotationMouseEvent</Control>
+          </Item>
+      </List>
+    </MouseEventProvider>  
+    
+    <KeyboardEventProvider>
+      <Instance>MainForm</Instance>
+      <List name="Actions">
+        <Item>
+          <Control>MoveToward</Control>
+          <List name="Keys">
+            <Item>W</Item>
+          </List>
+        </Item>
+        <Item>
+          <Control>MoveBackward</Control>
+          <List name="Keys">
+            <Item>S</Item>
+          </List>
+        </Item>
+        <Item>
+          <Control>MoveLeft</Control>
+          <List name="Keys">
+            <Item>A</Item>
+          </List>
+        </Item>
+        <Item>
+          <Control>MoveRight</Control>
+          <List name="Keys">
+            <Item>D</Item>
+          </List>
+        </Item>
+      </List>
+    </KeyboardEventProvider>
+  
+  </Builder>
+  <Object assemble="Mediator" type="Mediator.MoveTowardEventHandler" name="MoveToward">
+    <Step>0,33</Step>
+    <Angle>PI/2</Angle>
+   </Object>
+  <Object assemble="Mediator" type="Mediator.MoveTowardEventHandler" name="MoveBackward">
+    <Step>0,33</Step>
+    <Angle>-PI/2</Angle>
+   </Object>
+  <Object assemble="Mediator" type="Mediator.MoveTowardEventHandler" name="MoveLeft">
+    <Step>0,33</Step>
+    <Angle>PI</Angle>
+   </Object>
+  <Object assemble="Mediator" type="Mediator.MoveTowardEventHandler" name="MoveRight">
+    <Step>0,33</Step>
+    <Angle>0</Angle>
+   </Object>
+
+</DI>

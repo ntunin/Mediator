@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DI>
+  <Object id="obj01" assembly="Form1" type="Mediator.Form1" name ="MainForm"/>
+</DI>

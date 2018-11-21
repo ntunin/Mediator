@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DI>
+  <Object id="obj01" assembly="Mediator" type="Mediator.Form1" name ="MainForm"/>
+  
+  <Builder id="obj02" assembly="Mediator" type="Mediator.DeviceBuilder" name ="Device">
+    <Adapter>0</Adapter>
+    <DeviceType>Hardware</DeviceType>
+    <Control>MainForm</Control>
+    <CreateFlags>SoftwareWertexProcessing</CreateFlags>
+    <PresentParameters>
+      <Windowed>true</Windowed>
+      <SwapEffect>Discard</SwapEffect>
+    </PresentParameters>
+  </Builder>
+  
+</DI>
