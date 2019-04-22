@@ -39,6 +39,7 @@ namespace Mediator
             Vector3 dir = new Vector3((float)Math.Cos(fi), 0, (float)Math.Sin(fi));
             Matrix rotation = Matrix.RotationAxis(dir, teta) * Matrix.RotationY(fi);
             body.FinalTransform = rotation;
+
             Shared.Content["world_fi"] = fi; 
         }
     }

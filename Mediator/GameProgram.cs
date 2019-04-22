@@ -14,9 +14,9 @@ namespace Mediator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            DI.Initialize(new XMLDI("di.xml"));
+            //DI.Initialize(new XMLDI("di.xml"));
 
-            GameForm form = (GameForm)DI.Get(DIConfigs.MainForm);
+            GameForm form = new Form1();//(GameForm)DI.Get(DIConfigs.MainForm);
             form.InitializeGraphics();
             Application.Run(form);
         }

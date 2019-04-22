@@ -71,6 +71,8 @@ namespace Mediator
 
         private Vector3 getEdgeInDirection(Vector3 direction, out Vector3 position)
         {
+            position = new Vector3(0, 0, 0);
+            return new Vector3(0, 0, 0);
             List<Vector3> array = new List<Vector3>() {
                 BaseW, -BaseW,
                 BaseH, -BaseH
